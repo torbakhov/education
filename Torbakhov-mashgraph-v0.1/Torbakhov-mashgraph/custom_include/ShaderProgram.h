@@ -34,6 +34,11 @@ public:
 
   void SetUniform(const std::string &location, unsigned int value) const;
 
+  int uniformLocation(const char* s) const
+  {
+      return glGetUniformLocation(shaderProgram, s);
+  }
+
 private:
   static GLuint LoadShaderObject(GLenum type, const std::string &filename);
 

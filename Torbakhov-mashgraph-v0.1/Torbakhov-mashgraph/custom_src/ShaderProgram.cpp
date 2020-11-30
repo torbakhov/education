@@ -1,4 +1,4 @@
-#include "ShaderProgram.h"
+#include "../custom_include/ShaderProgram.h"
 
 ShaderProgram::ShaderProgram(const std::unordered_map<GLenum, std::string> &inputShaders)
 {

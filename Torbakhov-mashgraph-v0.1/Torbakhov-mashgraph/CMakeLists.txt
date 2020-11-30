@@ -4,11 +4,18 @@ project(main)
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
-    common.h
-    glad.c
-    main.cpp
-    ShaderProgram.h
-    ShaderProgram.cpp)
+    custom_include/common.h
+	custom_include/Mesh.h
+	custom_include/Camera.h
+	custom_include/Object.h
+	custom_include/ShaderProgram.h
+	
+    custom_src/glad.c
+	custom_src/ShaderProgram.cpp
+	custom_src/Object.cpp
+	custom_src/Mesh.cpp
+	
+    main.cpp)
 
 set(ADDITIONAL_INCLUDE_DIRS
         dependencies/include/GLAD)
@@ -37,6 +44,7 @@ add_executable(main ${SOURCE_FILES})
 
 target_include_directories(main PRIVATE ${OPENGL_INCLUDE_DIR})
 add_custom_command(TARGET main POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${PROJECT_SOURCE_DIR}/shaders" "${PROJECT_BINARY_DIR}")
+add_custom_command(TARGET main POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${PROJECT_SOURCE_DIR}/assets" "${PROJECT_BINARY_DIR}")
 
 if(WIN32)
   add_custom_command(TARGET main POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${PROJECT_SOURCE_DIR}/dependencies/bin" $<TARGET_FILE_DIR:main>)

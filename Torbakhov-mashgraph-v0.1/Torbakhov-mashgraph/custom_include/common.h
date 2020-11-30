@@ -5,9 +5,21 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
+#include <random>
+#include <map>
+
 
 #include <glad/glad.h>
 
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
+
+#define GLFW_DLL
+#include <GLFW/glfw3.h>
 
 //полезный макрос для проверки ошибок
 //в строчке, где он был записан вызывает ThrowExceptionOnGLError, которая при возникновении ошибки opengl
@@ -18,6 +30,8 @@
 
 //#define PI 3.1415926535897932384626433832795f
 
+//размеры окна
+static const GLsizei WIDTH = 640, HEIGHT = 480;
 
 static void ThrowExceptionOnGLError(int line, const char *file)
 {
