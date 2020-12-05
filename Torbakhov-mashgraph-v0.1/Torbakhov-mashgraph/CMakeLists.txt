@@ -14,6 +14,7 @@ set(SOURCE_FILES
 	custom_src/ShaderProgram.cpp
 	custom_src/Object.cpp
 	custom_src/Mesh.cpp
+	custom_src/Camera.cpp
 	
     main.cpp)
 

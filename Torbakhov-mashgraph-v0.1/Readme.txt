@@ -1,1 +1,6 @@
-Сборка с установленным cmake через run.bat на Windows и run на Linux
+Сборка
+1) С установленным cmake через run.bat на Windows и run на Linux
+
+
+Управление
+1) WASD + стрелочки - управление камерой

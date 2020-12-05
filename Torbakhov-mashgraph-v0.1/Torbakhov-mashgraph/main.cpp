@@ -59,6 +59,8 @@ int main(int argc, char** argv)
 	shaders[GL_FRAGMENT_SHADER] = "fragment.glsl";
 	ShaderProgram program(shaders); GL_CHECK_ERRORS;
 
+	glEnable(GL_DEPTH_TEST);
+
 	glfwSwapInterval(1); // force 60 frames per second
 
 	//Object
@@ -73,15 +75,22 @@ int main(int argc, char** argv)
 
 	//Camera
 	Camera cam;
-	cam.pos = glm::vec3(4.0f, 2.5f, 6.0f);
+	cam.pos = glm::vec3(4.0f, 2.5f, 3.0f);
 	cam.dir = -cam.pos;
 	cam.moveSpeed = 2.0f;
 
+	double time_prev = glfwGetTime();
+	float deltaTime;
 
 	//цикл обработки сообщений и отрисовки сцены каждый кадр
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
+
+		deltaTime = glfwGetTime() - time_prev;
+		time_prev = deltaTime + time_prev;
+
+		cam.moveCam(window, deltaTime);
 
 		//очищаем экран каждый кадр
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);               GL_CHECK_ERRORS;
