@@ -28,9 +28,23 @@ void Object::drawObject(Camera* camera, ShaderProgram* overrideShader) const
 		glUniformMatrix4fv(projectionMatrixID, 1, GL_FALSE, &projection[0][0]);
 	}
 	GL_CHECK_ERRORS;
-	
+	if (diffuseMap) {
+		diffuseMap->bind(0);
+		glUniform1i(usedShader->uniformLocation("diffuseTexture"), 0);
+	}
+	if (normalMap) {
+		normalMap->bind(1);
+		glUniform1i(usedShader->uniformLocation("normalTexture"), 1);
+	}
+	if (heightMap) {
+		heightMap->bind(2);
+		glUniform1i(usedShader->uniformLocation("heightTexture"), 2);
+	}
 	GL_CHECK_ERRORS;
 	mesh->render();
 	GL_CHECK_ERRORS;
 	usedShader->StopUseShader();
+	if (diffuseMap) diffuseMap->unbind(0);
+	if (normalMap) normalMap->unbind(1);
+	if (heightMap) heightMap->unbind(2);
 }

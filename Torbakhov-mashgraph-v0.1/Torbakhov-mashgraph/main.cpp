@@ -55,8 +55,8 @@ int main(int argc, char** argv)
 	//создание шейдерной программы из двух файлов с исходниками шейдеров
 	//используется класс-обертка ShaderProgram
 	std::unordered_map<GLenum, std::string> shaders;
-	shaders[GL_VERTEX_SHADER]   = "vertex.glsl";
-	shaders[GL_FRAGMENT_SHADER] = "fragment.glsl";
+	shaders[GL_VERTEX_SHADER]   = "vertex_normal_parallax.glsl";
+	shaders[GL_FRAGMENT_SHADER] = "fragment_normal_parallax.glsl";
 	ShaderProgram program(shaders); GL_CHECK_ERRORS;
 
 	glEnable(GL_DEPTH_TEST);
@@ -66,12 +66,24 @@ int main(int argc, char** argv)
 	//Object
 	Object cube;
 	Mesh cubeMesh;
+	Texture cubeTexture;
+	Texture cubeNormalMap;
+	Texture cubeHeightMap;
 
 	cubeMesh.load("meshes/cube.obj");
 	cube.mesh = &cubeMesh;
+
+	cubeTexture.loadTexture("textures/Metal_Grill_Base_Color.jpg");
+	cube.diffuseMap = &cubeTexture;
+	cubeNormalMap.loadTexture("textures/Metal_Grill_Normal.jpg");
+	cube.normalMap = &cubeNormalMap;
+	cubeHeightMap.loadTexture("textures/Metal_Grill_Height.bmp");
+	cube.heightMap = &cubeHeightMap;
 	cube.shader = &program;
-	cube.position = glm::vec3(0, -0.25, 0);
+	cube.position = glm::vec3(0, 0, 0);
 	cube.scale = 1;
+
+
 
 	//Camera
 	Camera cam;

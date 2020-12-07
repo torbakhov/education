@@ -5,16 +5,19 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
     custom_include/common.h
+	custom_include/stb_image.h
+	custom_include/ShaderProgram.h
 	custom_include/Mesh.h
 	custom_include/Camera.h
 	custom_include/Object.h
-	custom_include/ShaderProgram.h
+	custom_include/Texture.h
 	
     custom_src/glad.c
 	custom_src/ShaderProgram.cpp
 	custom_src/Object.cpp
 	custom_src/Mesh.cpp
 	custom_src/Camera.cpp
+	custom_src/Texture.cpp
 	
     main.cpp)
 

@@ -32,7 +32,7 @@
 //#define PI 3.1415926535897932384626433832795f
 
 //размеры окна
-static const GLsizei WIDTH = 640, HEIGHT = 480;
+static const GLsizei WIDTH = 1280, HEIGHT = 720;
 
 static void ThrowExceptionOnGLError(int line, const char *file)
 {
