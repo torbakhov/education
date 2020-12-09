@@ -1,6 +1,7 @@
 //internal includes
 #include "custom_include/common.h"
 #include "custom_include/Object.h"
+#include "custom_include/FrameBuffer.h"
 #include "custom_include/ShaderProgram.h"
 
 
@@ -63,12 +64,29 @@ int main(int argc, char** argv)
 
 	glfwSwapInterval(1); // force 60 frames per second
 
+	Mesh framebufferQuadMesh;
+	framebufferQuadMesh.load("meshes/rect.obj");
+
+	shaders[GL_VERTEX_SHADER] = "vertex_normal_parallax.glsl";
+	shaders[GL_FRAGMENT_SHADER] = "fragment_shadows.glsl";
+	ShaderProgram shadowGenShaderProgram(shaders);
+
+	Camera shadowCamera;
+	shadowCamera.pos = glm::vec3(8.0f, 6.0f, -5.0f);
+	shadowCamera.dir = -shadowCamera.pos;
+
+	Framebuffer shadowMapFramebuffer;
+	Texture shadowMapTexture;
+	shadowMapTexture.initDepth(SHADOWMAP_WIDTH, SHADOWMAP_HEIGHT);
+	shadowMapFramebuffer.initializeTextures(&shadowMapTexture);
+
+
 	//Object
-	Object cube;
-	Mesh cubeMesh;
-	Texture cubeTexture;
-	Texture cubeNormalMap;
-	Texture cubeHeightMap;
+	Object cube, plane;
+	Mesh cubeMesh, planeMesh;
+	Texture cubeTexture, planeTexture;
+	Texture cubeNormalMap, planeNormalMap;
+	Texture cubeHeightMap, planeHeightMap;
 
 	cubeMesh.load("meshes/cube.obj");
 	cube.mesh = &cubeMesh;
@@ -79,15 +97,30 @@ int main(int argc, char** argv)
 	cube.normalMap = &cubeNormalMap;
 	cubeHeightMap.loadTexture("textures/Metal_Grill_Height.bmp");
 	cube.heightMap = &cubeHeightMap;
+	cube.shadowMap = &shadowMapTexture;
 	cube.shader = &program;
-	cube.position = glm::vec3(0, 0, 0);
+	cube.position = glm::vec3(0, -0.1f, 0);
 	cube.scale = 1;
+
+	planeMesh.load("meshes/plane.obj");
+	plane.mesh = &planeMesh;
+
+	planeTexture.loadTexture("textures/Ground_Dirt_Base_Color.jpg");
+	plane.diffuseMap = &planeTexture;
+	planeNormalMap.loadTexture("textures/Ground_Dirt_Normal.jpg");
+	plane.normalMap = &planeNormalMap;
+	planeHeightMap.loadTexture("textures/Ground_Dirt_Height.bmp");
+	plane.heightMap = &planeHeightMap;
+	plane.shadowMap = &shadowMapTexture;
+	plane.shader = &program;
+	plane.position = glm::vec3(0, -2, 0);
+	plane.scale = 4;
 
 
 
 	//Camera
 	Camera cam;
-	cam.pos = glm::vec3(4.0f, 2.5f, 3.0f);
+	cam.pos = glm::vec3(7.0f, 5.0f, 7.0f);
 	cam.dir = -cam.pos;
 	cam.moveSpeed = 2.0f;
 
@@ -104,9 +137,19 @@ int main(int argc, char** argv)
 
 		cam.moveCam(window, deltaTime);
 
+		//Rendering ShadowMap
+		shadowMapFramebuffer.bind();
+
+		glViewport(0, 0, SHADOWMAP_WIDTH, SHADOWMAP_HEIGHT);
 		//очищаем экран каждый кадр
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);               GL_CHECK_ERRORS;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); GL_CHECK_ERRORS;
+
+		cube.drawObject(&shadowCamera, &shadowGenShaderProgram);
+		plane.drawObject(&shadowCamera, &shadowGenShaderProgram);
+		
+		shadowMapFramebuffer.unbind();
+		GL_CHECK_ERRORS;
 
 		program.StartUseShader();                           GL_CHECK_ERRORS;
 
@@ -118,7 +161,8 @@ int main(int argc, char** argv)
 		glClear     (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		
-		cube.drawObject(&cam, NULL);
+		cube.drawObject(&cam, NULL, &shadowCamera);
+		plane.drawObject(&cam, NULL, &shadowCamera);
 
 
 		program.StopUseShader();

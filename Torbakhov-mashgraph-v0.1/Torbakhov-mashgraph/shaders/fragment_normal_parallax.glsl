@@ -8,10 +8,13 @@ in vec2 fragTexCoords;
 in mat3 fragTBN;
 
 uniform vec3 cameraPosWS;
+uniform vec3 lightPosWS;
+uniform mat4 shadowSpaceMatrix;
 
 uniform sampler2D diffuseTexture;
 uniform sampler2D normalTexture;
 uniform sampler2D heightTexture;
+uniform sampler2D shadowTexture;
 
 out vec4 fragColor;
 
@@ -32,7 +35,7 @@ vec2 getParallaxTexCoords()
     float numLayers = mix(maxNumLayers, minNumLayers, abs(viewDirTS.z));
     float layerDepth = 1.0f / numLayers;
 
-    float heightScale = 0.04f;
+    float heightScale = 0.02f;
     vec2 parallaxOffset = heightScale * viewDirTS.xy / viewDirTS.z;
     vec2 deltaTexCoords = parallaxOffset / numLayers;
 
@@ -59,6 +62,48 @@ vec2 getParallaxTexCoords()
     return texCoords;
 }
 
+float readDepthMap(vec2 texCoords, vec2 texelSize)
+{
+    vec2 pixelPos = texCoords / texelSize + 0.5f;
+    vec2 fractPart = fract(pixelPos);
+    vec2 startTexel = (pixelPos - fractPart) * texelSize;
+
+    float texelBL = texture(shadowTexture, startTexel).r;
+    float texelBR = texture(shadowTexture, startTexel + vec2(texelSize.x, 0.0f)).r;
+    float texelTL = texture(shadowTexture, startTexel + vec2(0.0f, texelSize.y)).r;
+    float texelTR = texture(shadowTexture, startTexel + texelSize).r;
+
+    float maxLeft = mix(texelBL, texelTL, fractPart.y);
+    float maxRight = mix(texelBR, texelTR, fractPart.y);
+    return mix(maxLeft, maxRight, fractPart.x);
+}
+
+float calculateShadow(vec3 normalWS, vec3 lightDirWS)
+{
+    vec4 fragPositionLS = shadowSpaceMatrix * vec4(fragPositionWS, 1.0f);
+    vec3 projCoords = fragPositionLS.xyz / fragPositionLS.w * 0.5f + 0.5f;
+
+    vec2 texelSize = 1.0f / textureSize(shadowTexture, 0);
+
+    float depthCurrent = projCoords.z;
+
+    float maxBias = texelSize.x / 2.0f;
+    float bias = max(maxBias, 0.1f * maxBias * (1.0f - dot(normalWS, lightDirWS)));
+
+    float shadow = 0.0f;
+    float numSamples = 16.0f;
+    float maxSample = (numSamples - 1.0f) / 2.0f;
+    for (float x = -maxSample; x <= maxSample; x += 1.0f)
+    {
+        for (float y = -maxSample; y <= maxSample; y += 1.0f)
+        {
+            float depthPCF = readDepthMap(projCoords.xy + vec2(x, y) * texelSize, texelSize);
+            shadow = shadow + ( depthCurrent - bias > depthPCF ? 1.0f : 0.0f );
+        }
+    }
+    return shadow / (numSamples * numSamples);
+}
+
 vec4 calculate_lighting(vec3 normalWS, vec3 lightPositionWS, vec3 cameraPositionWS)
 {
 	float ambient = 0.1f;
@@ -71,7 +116,7 @@ vec4 calculate_lighting(vec3 normalWS, vec3 lightPositionWS, vec3 cameraPosition
     vec3 reflectDirWS = reflect(-lightDirWS, normalWS);
     float specular = 0.75f * pow(max(0.0f, dot(viewDirWS, reflectDirWS)), 32);
 
-	float shadow = 0.0f;
+	float shadow = calculateShadow(normalWS, lightDirWS);
 
 	float light_val = ambient + (1.0f - shadow) * (diffuse + specular);
 	return vec4(light_val, light_val, light_val, 1.0f);
@@ -79,7 +124,6 @@ vec4 calculate_lighting(vec3 normalWS, vec3 lightPositionWS, vec3 cameraPosition
 
 void main()
 {
-	vec3 lightPosWS = vec3(5,5,5);
 	vec2 texCoords = getParallaxTexCoords();
 	vec3 bumpedNormal = getBumpedNormal(texCoords);
 	fragColor = texture(diffuseTexture, texCoords) * calculate_lighting(bumpedNormal, lightPosWS, cameraPosWS);

@@ -10,7 +10,7 @@
 class Object {
 public:
 	Mesh* mesh;
-	Texture* diffuseMap, * normalMap, * heightMap;
+	Texture* diffuseMap, * normalMap, * heightMap, * shadowMap;
 	ShaderProgram* shader;
 	glm::vec3 position;
 	glm::quat rotation;
@@ -18,5 +18,5 @@ public:
 
 	Object() : mesh(NULL), shader(NULL), diffuseMap(NULL), normalMap(NULL), heightMap(NULL), scale(1.0f) {}
 
-	void drawObject(Camera* camera, ShaderProgram* overrideShader = NULL) const;
+	void drawObject(Camera* camera, ShaderProgram* overrideShader = NULL, Camera* shadowCamera = NULL) const;
 };

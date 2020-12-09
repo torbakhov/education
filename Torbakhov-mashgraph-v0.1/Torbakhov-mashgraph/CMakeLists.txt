@@ -11,6 +11,7 @@ set(SOURCE_FILES
 	custom_include/Camera.h
 	custom_include/Object.h
 	custom_include/Texture.h
+	custom_include/FrameBuffer.h
 	
     custom_src/glad.c
 	custom_src/ShaderProgram.cpp
@@ -18,6 +19,7 @@ set(SOURCE_FILES
 	custom_src/Mesh.cpp
 	custom_src/Camera.cpp
 	custom_src/Texture.cpp
+	custom_src/FrameBuffer.cpp
 	
     main.cpp)
 

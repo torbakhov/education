@@ -1,6 +1,6 @@
 #include "../custom_include/Object.h"
 
-void Object::drawObject(Camera* camera, ShaderProgram* overrideShader) const
+void Object::drawObject(Camera* camera, ShaderProgram* overrideShader, Camera* shadowCamera) const
 {
 	ShaderProgram* usedShader = overrideShader;
 	if (!usedShader)
@@ -27,6 +27,16 @@ void Object::drawObject(Camera* camera, ShaderProgram* overrideShader) const
 		glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &view[0][0]);
 		glUniformMatrix4fv(projectionMatrixID, 1, GL_FALSE, &projection[0][0]);
 	}
+	if (shadowCamera) {
+		int lightPosWSID = usedShader->uniformLocation("lightPosWS");
+		int shadowSpaceMatrixID = usedShader->uniformLocation("shadowSpaceMatrix");
+
+		glm::mat4 shadowView = shadowCamera->viewMatrix();
+		glm::mat4 shadowProjection = shadowCamera->projectionMatrix();
+		glm::mat4 shadowSpace = shadowProjection * shadowView;
+		glUniform3f(lightPosWSID, shadowCamera->pos.x, shadowCamera->pos.y, shadowCamera->pos.z);
+		glUniformMatrix4fv(shadowSpaceMatrixID, 1, GL_FALSE, &shadowSpace[0][0]);
+	}
 	GL_CHECK_ERRORS;
 	if (diffuseMap) {
 		diffuseMap->bind(0);
@@ -40,6 +50,10 @@ void Object::drawObject(Camera* camera, ShaderProgram* overrideShader) const
 		heightMap->bind(2);
 		glUniform1i(usedShader->uniformLocation("heightTexture"), 2);
 	}
+	if (shadowMap) {
+		shadowMap->bind(3);
+		glUniform1i(usedShader->uniformLocation("shadowTexture"), 3);
+	}
 	GL_CHECK_ERRORS;
 	mesh->render();
 	GL_CHECK_ERRORS;
@@ -47,4 +61,5 @@ void Object::drawObject(Camera* camera, ShaderProgram* overrideShader) const
 	if (diffuseMap) diffuseMap->unbind(0);
 	if (normalMap) normalMap->unbind(1);
 	if (heightMap) heightMap->unbind(2);
+	if (shadowMap) shadowMap->unbind(3);
 }
