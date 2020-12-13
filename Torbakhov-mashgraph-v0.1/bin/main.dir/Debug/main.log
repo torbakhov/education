@@ -1,0 +1,20 @@
+﻿  Building Custom Rule C:/Users/Daniil/Desktop/education/Torbakhov-mashgraph-v0.1/Torbakhov-mashgraph/CMakeLists.txt
+  glad.c
+  ShaderProgram.cpp
+  Object.cpp
+  Mesh.cpp
+C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_src\Mesh.cpp(124,15): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_src\Mesh.cpp(135,13): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_src\Mesh.cpp(142,4): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_src\Mesh.cpp(147,4): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_src\Mesh.cpp(153,4): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_src\Mesh.cpp(159,18): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_src\Mesh.cpp(271,68): warning C4267: аргумент: преобразование из "size_t" в "GLsizei"; возможна потеря данных
+  Camera.cpp
+  Texture.cpp
+  FrameBuffer.cpp
+  main.cpp
+C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\main.cpp(200,29): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+  Создание кода...
+     Создается библиотека C:/Users/Daniil/Desktop/education/Torbakhov-mashgraph-v0.1/bin/Debug/main.lib и объект C:/Users/Daniil/Desktop/education/Torbakhov-mashgraph-v0.1/bin/Debug/main.exp
+  main.vcxproj -> C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\bin\Debug\main.exe

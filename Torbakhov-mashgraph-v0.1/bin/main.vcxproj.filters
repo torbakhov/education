@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_src\glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_src\ShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_src\Object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_src\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_src\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_src\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_src\FrameBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_include\common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_include\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_include\ShaderProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_include\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_include\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_include\Object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_include\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\custom_include\FrameBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Daniil\Desktop\education\Torbakhov-mashgraph-v0.1\Torbakhov-mashgraph\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{55748538-6BB4-306E-BEC8-2DCD714A1F02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{3A6662F9-689B-32BA-8A1C-FA717F1FCE94}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

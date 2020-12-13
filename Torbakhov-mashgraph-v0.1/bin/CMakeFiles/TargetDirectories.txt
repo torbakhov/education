@@ -1,0 +1,3 @@
+C:/Users/Daniil/Desktop/education/Torbakhov-mashgraph-v0.1/bin/CMakeFiles/main.dir
+C:/Users/Daniil/Desktop/education/Torbakhov-mashgraph-v0.1/bin/CMakeFiles/ALL_BUILD.dir
+C:/Users/Daniil/Desktop/education/Torbakhov-mashgraph-v0.1/bin/CMakeFiles/ZERO_CHECK.dir

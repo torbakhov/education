@@ -1,0 +1,10 @@
+^C:\USERS\DANIIL\DESKTOP\EDUCATION\TORBAKHOV-MASHGRAPH-V0.1\BIN\CMAKEFILES\E2FD4DA5ABDEF0217D0DA47E52B6B385\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Daniil/Desktop/education/Torbakhov-mashgraph-v0.1/Torbakhov-mashgraph -BC:/Users/Daniil/Desktop/education/Torbakhov-mashgraph-v0.1/bin --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Daniil/Desktop/education/Torbakhov-mashgraph-v0.1/bin/main.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

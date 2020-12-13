@@ -1,4 +1,4 @@
-rd /S /Q Torbakhov-mashgraph-build
-mkdir Torbakhov-mashgraph-build
-cd Torbakhov-mashgraph-build
+rd /S /Q bin
+mkdir bin
+cd bin
 cmake ../Torbakhov-mashgraph
